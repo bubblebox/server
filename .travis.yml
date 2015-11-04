@@ -3,6 +3,11 @@ language: go
 go:
   - 1.5.1
 
+env:
+  global:
+    - GOPATH=${TRAVIS_BUILD_DIR}/server/Godeps/_workspace:$GOPATH
+    - PATH=${TRAVIS_BUILD_DIR}/server/Godeps/_workspace/bin:$PATH
+
 before_install:
   npm install -g bower
 
