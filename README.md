@@ -1,5 +1,7 @@
 # Fire Dragon
 
+[![Build Status](https://travis-ci.org/ariejan/firedragon.svg?branch=master)](https://travis-ci.org/ariejan/firedragon)
+
 A modern content hosting service builtd on Go and Ember.js.
 
 See [the wiki](https://github.com/ariejan/firedragon/wiki) for more details.
