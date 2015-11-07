@@ -3,6 +3,11 @@
 	"GoVersion": "go1.5.1",
 	"Deps": [
 		{
+			"ImportPath": "github.com/boltdb/bolt",
+			"Comment": "v1.1.0-2-gb4e2091",
+			"Rev": "b4e20916f62da6837bd349ea75d58c475e1f9fe1"
+		},
+		{
 			"ImportPath": "github.com/gorilla/context",
 			"Rev": "1c83b3eabd45b6d76072b66b746c20815fb2872d"
 		},
