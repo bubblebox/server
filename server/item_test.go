@@ -1,25 +1,19 @@
 package main_test
 
 import (
-	"os"
 	"testing"
 
 	"github.com/ariejan/firedragon/server"
 )
 
-var item = &main.Item{
-	Code:    "abc",
-	Type:    main.TextItemType,
-	Content: "Lorem ipsum",
-}
-
 func TestItemPersistence(t *testing.T) {
 	var err error
 
-	db := main.DB{}
-	db.Open("testing.db")
-	defer os.Remove(db.Path())
-	defer db.Close()
+	item := &main.Item{
+		Code:    "abc",
+		Type:    main.TextItemType,
+		Content: "Lorem ipsum",
+	}
 
 	err = db.SaveItem(item)
 	if err != nil {
@@ -34,5 +28,4 @@ func TestItemPersistence(t *testing.T) {
 	if *result == *item {
 		t.Errorf("Expected %v but got %v", *item, *result)
 	}
-
 }
