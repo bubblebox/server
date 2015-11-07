@@ -33,6 +33,8 @@ test:
 
 clean:
 	rm -rf $(DESTINATION)
+	$(MAKE) -C $(SERVER_DIR) clean
+	$(MAKE) -C $(CLIENT_DIR) clean
 
 .PHONY: clean
 

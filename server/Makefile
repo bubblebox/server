@@ -6,6 +6,7 @@ GO_TEST_CMD = go test -v ./...
 
 $(DESTINATION): *.go
 	$(GO_BUILD_CMD) $(GO_LDFLAGS) -o $(DESTINATION) server.go
+	chmod +x $(DESTINATION)
 
 setup:
 	echo "Nothing to do"
