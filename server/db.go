@@ -19,10 +19,7 @@ func (db *DB) GetItem(code string) (*Item, error) {
 	err := db.View(func(tx *bolt.Tx) error {
 		data := tx.Bucket([]byte("items")).Get([]byte(code))
 
-		err := json.Unmarshal(data, item)
-
-		if err != nil {
-			log.Fatal("Could not unmarshal JSON")
+		if err := json.Unmarshal(data, item); err != nil {
 			return err
 		}
 

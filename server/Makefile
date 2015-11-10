@@ -5,7 +5,7 @@ GO_LDFLAGS =
 GO_TEST_CMD = go test -v ./...
 
 $(DESTINATION): *.go
-	$(GO_BUILD_CMD) $(GO_LDFLAGS) -o $(DESTINATION) server.go
+	$(GO_BUILD_CMD) $(GO_LDFLAGS) -o $(DESTINATION) *.go
 	chmod +x $(DESTINATION)
 
 setup:
