@@ -13,8 +13,6 @@ module('Acceptance | visit home', {
 });
 
 test('visiting root', function(assert) {
-  const contact = server.create('contact');
-
   visit('/');
 
   andThen(function() {
