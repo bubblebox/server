@@ -16,6 +16,6 @@ test('visiting root', function(assert) {
   visit('/');
 
   andThen(function() {
-    assert.equal(find('h2:contains(Firedragon)').length, 1);
+    assert.equal(find('h2:contains(Fire Dragon)').length, 1);
   });
 });
