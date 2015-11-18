@@ -8,12 +8,34 @@
 			"Rev": "b4e20916f62da6837bd349ea75d58c475e1f9fe1"
 		},
 		{
+			"ImportPath": "github.com/gedex/inflector",
+			"Rev": "8c0e57904488c554ab26caec525db5c92b23f051"
+		},
+		{
+			"ImportPath": "github.com/golang/gddo/httputil",
+			"Rev": "a93040f23f0e66abb4997d7dd149623fe2bbaae7"
+		},
+		{
 			"ImportPath": "github.com/gorilla/context",
 			"Rev": "1c83b3eabd45b6d76072b66b746c20815fb2872d"
 		},
 		{
 			"ImportPath": "github.com/gorilla/mux",
 			"Rev": "ad4d7a5882b961e07e2626045eb995c022ac6664"
+		},
+		{
+			"ImportPath": "github.com/julienschmidt/httprouter",
+			"Comment": "v1.1-10-g77a895a",
+			"Rev": "77a895ad01ebc98a4dc95d8355bc825ce80a56f6"
+		},
+		{
+			"ImportPath": "github.com/manyminds/api2go",
+			"Comment": "0.6-2-g7e85e66",
+			"Rev": "7e85e66ad917fb1269891367fa712207fd06f33e"
+		},
+		{
+			"ImportPath": "golang.org/x/net/context",
+			"Rev": "042ba42fa6633b34205efc66ba5719cd3afd8d38"
 		}
 	]
 }
