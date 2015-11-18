@@ -23,6 +23,7 @@ func (i ItemResource) FindOne(ID string, r api2go.Request) (api2go.Responder, er
 	return &Response{Res: res}, nil
 }
 
+// FindAll items
 func (i ItemResource) FindAll(r api2go.Request) (api2go.Responder, error) {
 	res, err := i.ItemStorage.GetAll()
 	if err != nil {
@@ -32,14 +33,17 @@ func (i ItemResource) FindAll(r api2go.Request) (api2go.Responder, error) {
 	return &Response{Res: res}, nil
 }
 
+// Create one item
 func (i ItemResource) Create(obj interface{}, r api2go.Request) (api2go.Responder, error) {
 	return nil, fmt.Errorf("Not implemented")
 }
 
+// Delete one item
 func (i ItemResource) Delete(id string, r api2go.Request) (api2go.Responder, error) {
 	return nil, fmt.Errorf("Not implemented")
 }
 
+// Update one item
 func (i ItemResource) Update(obj interface{}, r api2go.Request) (api2go.Responder, error) {
 	return nil, fmt.Errorf("Not implemented")
 }
