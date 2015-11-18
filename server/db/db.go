@@ -1,9 +1,10 @@
-package main
+package db
 
 import (
 	"encoding/json"
 	"log"
 
+	"github.com/ariejan/firedragon/server/model"
 	"github.com/boltdb/bolt"
 )
 
@@ -13,11 +14,11 @@ type DB struct {
 }
 
 // GetItem will retrieve an item from the database, given it's unique Code
-func (db *DB) GetItem(code string) (*Item, error) {
-	item := &Item{Code: code}
+func (db *DB) GetItem(id string) (*model.Item, error) {
+	item := &model.Item{ID: id}
 
 	err := db.View(func(tx *bolt.Tx) error {
-		data := tx.Bucket([]byte("items")).Get([]byte(code))
+		data := tx.Bucket([]byte("items")).Get([]byte(id))
 
 		if err := json.Unmarshal(data, item); err != nil {
 			return err
@@ -33,10 +34,38 @@ func (db *DB) GetItem(code string) (*Item, error) {
 	return item, nil
 }
 
+// GetItems returns all items, yes, all of them.
+// TODO: Add pagination
+func (db *DB) GetItems() ([]*model.Item, error) {
+	items := make([]*model.Item, 0)
+
+	err := db.View(func(tx *bolt.Tx) error {
+		bucket := tx.Bucket([]byte("items"))
+		bucket.ForEach(func(k, v []byte) error {
+			item := &model.Item{ID: string(k)}
+			if err := json.Unmarshal(v, item); err != nil {
+				return err
+			}
+
+			items = append(items, item)
+
+			return nil
+		})
+
+		return nil
+	})
+
+	if err != nil {
+		return nil, err
+	}
+
+	return items, nil
+}
+
 // SaveItem will save the item, if the item has no code yet, it will be
 // automatically assigned one. If a code is provided and it already
 // exists, an error will be returned.
-func (db *DB) SaveItem(item *Item) error {
+func (db *DB) SaveItem(item *model.Item) error {
 	err := db.Update(func(tx *bolt.Tx) error {
 		bucket := tx.Bucket([]byte("items"))
 
@@ -46,9 +75,9 @@ func (db *DB) SaveItem(item *Item) error {
 			return err
 		}
 
-		err = bucket.Put([]byte(item.Code), data)
+		err = bucket.Put([]byte(item.ID), data)
 
-		return nil
+		return err
 	})
 
 	if err != nil {
@@ -57,6 +86,17 @@ func (db *DB) SaveItem(item *Item) error {
 	}
 
 	return nil
+}
+
+// DeleteItem delete the item with `id` from the database
+func (db *DB) DeleteItem(id string) error {
+	err := db.Update(func(tx *bolt.Tx) error {
+		bucket := tx.Bucket([]byte("items"))
+
+		return bucket.Delete([]byte(id))
+	})
+
+	return err
 }
 
 // Open will open a new Bolt database and create the necessary buckets

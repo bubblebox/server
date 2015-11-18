@@ -1,50 +1,43 @@
 package main
 
 import (
+	"fmt"
 	"log"
 	"net/http"
 	"time"
 
-	"github.com/gorilla/mux"
+	"github.com/ariejan/firedragon/server/api"
+	"github.com/ariejan/firedragon/server/db"
+	"github.com/ariejan/firedragon/server/model"
 )
 
 var (
-	port = ":8042"
+	port   = 8042
+	dbName = "firedragon.db"
 )
 
-// Router configures a new mux.Router and returns it for routing HTTP requests.
-func Router(db *DB) *mux.Router {
-	r := mux.NewRouter()
-
-	r.HandleFunc("/api/v1/items", CreateItemHandler(db)).Methods("POST")
-	r.HandleFunc("/api/v1/items/{code}", ViewItemHandler(db)).Methods("GET")
-
-	r.HandleFunc("/{code}", ItemHandler(db))
-
-	r.PathPrefix("/").Handler(http.FileServer(http.Dir("./public/")))
-
-	return r
-}
-
 func main() {
+	// Configure logging
 	log.SetFlags(log.Ldate | log.Ltime | log.Lmicroseconds | log.Lshortfile)
 
-	db := &DB{}
-	db.Open("firedragon.db")
+	// Setup bolt database
+	db := &db.DB{}
+	db.Open(dbName)
 	defer db.Close()
 
+	// Create seed data
+	// TODO: Replace this with an optional CLI command to seed data.
 	seedData(db)
 
-	http.Handle("/", Router(db))
-
-	log.Printf("Starting Fire Dragon server on %s", port)
-	log.Fatal(http.ListenAndServe(port, nil))
+	// Start HTTP server
+	log.Printf("Listening on :%d", port)
+	http.ListenAndServe(fmt.Sprintf(":%d", port), api.Handler(port, db))
 }
 
-func seedData(db *DB) {
-	var items = []*Item{
-		&Item{Code: "url", Type: URLItemType, Content: "https://ariejan.net", CreatedAt: time.Now()},
-		&Item{Code: "txt", Type: TextItemType, Content: "Lorem ipsum", CreatedAt: time.Now()},
+func seedData(db *db.DB) {
+	var items = []*model.Item{
+		&model.Item{ID: "url", Type: model.URLItemType, Content: "https://ariejan.net", CreatedAt: time.Now()},
+		&model.Item{ID: "txt", Type: model.TextItemType, Content: "Lorem ipsum", CreatedAt: time.Now()},
 	}
 
 	for _, item := range items {
