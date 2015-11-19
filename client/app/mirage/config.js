@@ -16,9 +16,7 @@ export default function() {
   */
   this.get('/items', function(db) {
     return {
-      data: db.items.map(attrs => (
-        { type: 'items', id: attrs.code, attributes: attrs }
-      ))
+      items: db.items
     };
   });
 
