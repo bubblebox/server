@@ -86,4 +86,11 @@ func TestItemDestroy(t *testing.T) {
 	if response.Code != http.StatusOK {
 		t.Errorf("Expected HTTP 200 OK, but got HTTP %d instead", response.Code)
 	}
+
+	actual := response.Body.String()
+	expected := `{}`
+
+	if !matchJSON(actual, expected) {
+		t.Errorf("Expected %s to match %s", actual, expected)
+	}
 }

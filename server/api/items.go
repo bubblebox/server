@@ -50,6 +50,6 @@ func itemsDestroyHandler(db *db.DB) gin.HandlerFunc {
 			return
 		}
 
-		c.String(http.StatusOK, "")
+		c.JSON(http.StatusOK, gin.H{})
 	}
 }
