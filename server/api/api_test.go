@@ -76,3 +76,14 @@ func TestItemsShowNotFound(t *testing.T) {
 		t.Errorf("Expected HTTP 404 Not found, but got HTTP %d instead", response.Code)
 	}
 }
+
+func TestItemDestroy(t *testing.T) {
+	request, _ := http.NewRequest("DELETE", "/api/v1/items/url", nil)
+	response := httptest.NewRecorder()
+
+	router.ServeHTTP(response, request)
+
+	if response.Code != http.StatusOK {
+		t.Errorf("Expected HTTP 200 OK, but got HTTP %d instead", response.Code)
+	}
+}

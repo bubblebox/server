@@ -39,3 +39,17 @@ func itemsShowHandler(db *db.DB) gin.HandlerFunc {
 		})
 	}
 }
+
+func itemsDestroyHandler(db *db.DB) gin.HandlerFunc {
+	return func(c *gin.Context) {
+		code := c.Param("code")
+		err := db.DeleteItem(code)
+
+		if err != nil {
+			c.String(http.StatusNotFound, "Item not found.")
+			return
+		}
+
+		c.String(http.StatusOK, "")
+	}
+}

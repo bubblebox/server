@@ -13,6 +13,14 @@ type DB struct {
 	*bolt.DB
 }
 
+// DoesItemExist returns true if an item with `code` exists. Falase otherwise.
+func (db *DB) DoesItemExist(code string) bool {
+	// TODO: This is the lazy implementation, there's probably a more efficient
+	// way for Bolt to check if a key exists.
+	_, err := db.GetItem(code)
+	return err == nil
+}
+
 // GetItem will retrieve an item from the database, given it's unique Code
 func (db *DB) GetItem(code string) (*model.Item, error) {
 	item := &model.Item{Code: code}

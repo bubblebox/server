@@ -23,6 +23,16 @@ func TestGetItem(t *testing.T) {
 	}
 }
 
+func TestItemExists(t *testing.T) {
+	if !database.DoesItemExist("url") {
+		t.Error("Expected item 'url' to exist.")
+	}
+
+	if database.DoesItemExist("not-found") {
+		t.Error("Expected item 'not found' not to exist.")
+	}
+}
+
 func TestGetItems(t *testing.T) {
 	items, err := database.GetItems()
 
@@ -80,9 +90,8 @@ func TestDeleteItem(t *testing.T) {
 		CreatedAt: time.Now(),
 	})
 
-	item, _ := database.GetItem("bam")
-	if item == nil {
-		t.Error("Expected item to be persisted.")
+	if !database.DoesItemExist("bam") {
+		t.Error("Expected 'bam' to be saved to database.")
 	}
 
 	err := database.DeleteItem("bam")
@@ -92,14 +101,8 @@ func TestDeleteItem(t *testing.T) {
 		t.Error(err)
 	}
 
-	actual, err := database.GetItem("bam")
-
-	if actual != nil {
-		t.Error("Expected item to be `nil` when it does not exist.")
-	}
-
-	if err == nil {
-		t.Error("Expected an error when unable to find an Item by ID.")
+	if database.DoesItemExist("bam") {
+		t.Error("Expected 'bam' to be deleted.")
 	}
 }
 
