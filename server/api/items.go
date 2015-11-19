@@ -15,6 +15,7 @@ func itemsIndexHandler(db *db.DB) gin.HandlerFunc {
 			c.JSON(http.StatusInternalServerError, gin.H{
 				"items": []string{},
 			})
+			return
 		}
 
 		c.JSON(http.StatusOK, gin.H{
@@ -29,9 +30,8 @@ func itemsShowHandler(db *db.DB) gin.HandlerFunc {
 		item, err := db.GetItem(code)
 
 		if err != nil {
-			c.JSON(http.StatusInternalServerError, gin.H{
-				"items": []string{},
-			})
+			c.String(http.StatusNotFound, "Item not found.")
+			return
 		}
 
 		c.JSON(http.StatusOK, gin.H{

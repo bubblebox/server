@@ -65,3 +65,14 @@ func TestItemShow(t *testing.T) {
 		t.Errorf("Expected %s to match %s", actual, expected)
 	}
 }
+
+func TestItemsShowNotFound(t *testing.T) {
+	request, _ := http.NewRequest("GET", "/api/v1/items/unknown", nil)
+	response := httptest.NewRecorder()
+
+	router.ServeHTTP(response, request)
+
+	if response.Code != http.StatusNotFound {
+		t.Errorf("Expected HTTP 404 Not found, but got HTTP %d instead", response.Code)
+	}
+}
