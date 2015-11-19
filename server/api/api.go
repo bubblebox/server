@@ -9,6 +9,7 @@ import (
 func Setup(group *gin.RouterGroup, db *db.DB) {
 	group.Use()
 	{
+		group.GET("/items/:code", itemsShowHandler(db))
 		group.GET("/items", itemsIndexHandler(db))
 	}
 }

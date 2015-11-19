@@ -22,3 +22,20 @@ func itemsIndexHandler(db *db.DB) gin.HandlerFunc {
 		})
 	}
 }
+
+func itemsShowHandler(db *db.DB) gin.HandlerFunc {
+	return func(c *gin.Context) {
+		code := c.Param("code")
+		item, err := db.GetItem(code)
+
+		if err != nil {
+			c.JSON(http.StatusInternalServerError, gin.H{
+				"items": []string{},
+			})
+		}
+
+		c.JSON(http.StatusOK, gin.H{
+			"item": item,
+		})
+	}
+}
