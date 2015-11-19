@@ -14,11 +14,11 @@ type DB struct {
 }
 
 // GetItem will retrieve an item from the database, given it's unique Code
-func (db *DB) GetItem(id string) (*model.Item, error) {
-	item := &model.Item{ID: id}
+func (db *DB) GetItem(code string) (*model.Item, error) {
+	item := &model.Item{Code: code}
 
 	err := db.View(func(tx *bolt.Tx) error {
-		data := tx.Bucket([]byte("items")).Get([]byte(id))
+		data := tx.Bucket([]byte("items")).Get([]byte(code))
 
 		if err := json.Unmarshal(data, item); err != nil {
 			return err
@@ -37,12 +37,12 @@ func (db *DB) GetItem(id string) (*model.Item, error) {
 // GetItems returns all items, yes, all of them.
 // TODO: Add pagination
 func (db *DB) GetItems() ([]*model.Item, error) {
-	items := make([]*model.Item, 0)
+	var items []*model.Item
 
 	err := db.View(func(tx *bolt.Tx) error {
 		bucket := tx.Bucket([]byte("items"))
 		bucket.ForEach(func(k, v []byte) error {
-			item := &model.Item{ID: string(k)}
+			item := &model.Item{Code: string(k)}
 			if err := json.Unmarshal(v, item); err != nil {
 				return err
 			}
@@ -75,7 +75,7 @@ func (db *DB) SaveItem(item *model.Item) error {
 			return err
 		}
 
-		err = bucket.Put([]byte(item.ID), data)
+		err = bucket.Put([]byte(item.Code), data)
 
 		return err
 	})

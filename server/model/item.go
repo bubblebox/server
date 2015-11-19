@@ -2,6 +2,9 @@ package model
 
 import "time"
 
+// ContentType specifies what type of content an item contains.
+type ContentType int
+
 const (
 	// URLItemType represents single URL items.
 	URLItemType = iota
@@ -12,19 +15,8 @@ const (
 
 // Item represents a single item stored and accessible via a short URL.
 type Item struct {
-	ID        string `jsonapi:"-"`
-	Type      int
+	Code      string
+	Type      ContentType
 	Content   string
-	CreatedAt time.Time `jsonapi:"-"`
-}
-
-// GetID to satisfy jsonapi.MarshalIdentifier interface
-func (i Item) GetID() string {
-	return i.ID
-}
-
-// SetID to satisfy jsonapi.UnmarshalIdentifier interface
-func (i *Item) SetID(id string) error {
-	i.ID = id
-	return nil
+	CreatedAt time.Time
 }

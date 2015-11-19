@@ -18,7 +18,7 @@ func TestGetItem(t *testing.T) {
 		t.Error(err)
 	}
 
-	if item.ID != "url" {
+	if item.Code != "url" {
 		t.Error("GetItem() did not return an Item with the proper ID.")
 	}
 }
@@ -52,9 +52,10 @@ func TestSaveItem(t *testing.T) {
 	var actual *model.Item
 
 	item := &model.Item{
-		ID:      "bam",
-		Content: "Lorem Ipsum",
-		Type:    model.TextItemType,
+		Code:      "bam",
+		Content:   "Lorem Ipsum",
+		Type:      model.TextItemType,
+		CreatedAt: time.Now(),
 	}
 
 	err = database.SaveItem(item)
@@ -68,14 +69,15 @@ func TestSaveItem(t *testing.T) {
 		t.Error("Expected to be able to retrieve just saved Item.")
 	}
 
-	database.DeleteItem(item.ID)
+	database.DeleteItem(item.Code)
 }
 
 func TestDeleteItem(t *testing.T) {
 	database.SaveItem(&model.Item{
-		ID:      "bam",
-		Content: "Lorem Ipsum",
-		Type:    model.TextItemType,
+		Code:      "bam",
+		Content:   "Lorem Ipsum",
+		Type:      model.TextItemType,
+		CreatedAt: time.Now(),
 	})
 
 	item, _ := database.GetItem("bam")
@@ -105,8 +107,8 @@ func setup() {
 	database.Open("testing.db")
 
 	items := []*model.Item{
-		&model.Item{ID: "url", Type: model.URLItemType, Content: "https://ariejan.net", CreatedAt: time.Now()},
-		&model.Item{ID: "txt", Type: model.TextItemType, Content: "Lorem ipsum", CreatedAt: time.Now()},
+		&model.Item{Code: "url", Type: model.URLItemType, Content: "https://ariejan.net", CreatedAt: time.Now()},
+		&model.Item{Code: "txt", Type: model.TextItemType, Content: "Lorem ipsum", CreatedAt: time.Now()},
 	}
 
 	for _, item := range items {

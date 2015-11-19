@@ -1,12 +1,9 @@
 package main
 
 import (
-	"fmt"
 	"log"
-	"net/http"
 	"time"
 
-	"github.com/ariejan/firedragon/server/api"
 	"github.com/ariejan/firedragon/server/db"
 	"github.com/ariejan/firedragon/server/model"
 )
@@ -31,13 +28,12 @@ func main() {
 
 	// Start HTTP server
 	log.Printf("Listening on :%d", port)
-	http.ListenAndServe(fmt.Sprintf(":%d", port), api.Handler(port, db))
 }
 
 func seedData(db *db.DB) {
 	var items = []*model.Item{
-		&model.Item{ID: "url", Type: model.URLItemType, Content: "https://ariejan.net", CreatedAt: time.Now()},
-		&model.Item{ID: "txt", Type: model.TextItemType, Content: "Lorem ipsum", CreatedAt: time.Now()},
+		&model.Item{Code: "url", Type: model.URLItemType, Content: "https://ariejan.net", CreatedAt: time.Now()},
+		&model.Item{Code: "txt", Type: model.TextItemType, Content: "Lorem ipsum", CreatedAt: time.Now()},
 	}
 
 	for _, item := range items {
