@@ -15,8 +15,8 @@ const (
 
 // Item represents a single item stored and accessible via a short URL.
 type Item struct {
-	Code      string
-	Type      ContentType
-	Content   string
-	CreatedAt time.Time
+	Code      string      `json:"code"`
+	Type      ContentType `json:"type"`
+	Content   string      `json:"content"`
+	CreatedAt time.Time   `json:"created_at"`
 }

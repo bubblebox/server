@@ -5,6 +5,7 @@ import (
 	"log"
 	"time"
 
+	"github.com/ariejan/firedragon/server/api"
 	"github.com/ariejan/firedragon/server/db"
 	"github.com/ariejan/firedragon/server/ember"
 	"github.com/ariejan/firedragon/server/model"
@@ -31,6 +32,7 @@ func main() {
 
 	// Setup Gin
 	router := gin.Default()
+	api.Setup(router.Group("/api/v1"), db)
 	ember.Setup(router.Group("/dashboard"))
 
 	// Start HTTP server

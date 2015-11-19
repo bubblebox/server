@@ -36,14 +36,14 @@ func (db *DB) GetItem(code string) (*model.Item, error) {
 
 // GetItems returns all items, yes, all of them.
 // TODO: Add pagination
-func (db *DB) GetItems() ([]*model.Item, error) {
-	var items []*model.Item
+func (db *DB) GetItems() ([]model.Item, error) {
+	var items []model.Item
 
 	err := db.View(func(tx *bolt.Tx) error {
 		bucket := tx.Bucket([]byte("items"))
 		bucket.ForEach(func(k, v []byte) error {
-			item := &model.Item{Code: string(k)}
-			if err := json.Unmarshal(v, item); err != nil {
+			item := model.Item{Code: string(k)}
+			if err := json.Unmarshal(v, &item); err != nil {
 				return err
 			}
 
