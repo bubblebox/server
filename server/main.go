@@ -1,11 +1,14 @@
 package main
 
 import (
+	"fmt"
 	"log"
 	"time"
 
 	"github.com/ariejan/firedragon/server/db"
+	"github.com/ariejan/firedragon/server/ember"
 	"github.com/ariejan/firedragon/server/model"
+	"github.com/gin-gonic/gin"
 )
 
 var (
@@ -26,8 +29,13 @@ func main() {
 	// TODO: Replace this with an optional CLI command to seed data.
 	seedData(db)
 
+	// Setup Gin
+	router := gin.Default()
+	ember.Setup(router.Group("/dashboard"))
+
 	// Start HTTP server
 	log.Printf("Listening on :%d", port)
+	router.Run(fmt.Sprintf(":%d", port))
 }
 
 func seedData(db *db.DB) {
