@@ -22,7 +22,7 @@ func Handler(port int, db *db.DB) http.Handler {
 
 	r := mux.NewRouter()
 	r.PathPrefix("/api/v1/").Handler(handler)
-	r.PathPrefix("/").Handler(http.FileServer(http.Dir("./public/")))
+	r.PathPrefix("/dashboard/").Handler(http.StripPrefix("/dashboard/", http.FileServer(http.Dir("./public/"))))
 
 	return r
 }
