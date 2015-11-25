@@ -4,7 +4,7 @@ module.exports = function(environment) {
   var ENV = {
     modulePrefix: 'firedragon',
     environment: environment,
-    baseURL: '/',
+    baseURL: '/dashboard/',
     locationType: 'auto',
     EmberENV: {
       FEATURES: {

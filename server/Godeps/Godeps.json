@@ -8,12 +8,26 @@
 			"Rev": "b4e20916f62da6837bd349ea75d58c475e1f9fe1"
 		},
 		{
-			"ImportPath": "github.com/gorilla/context",
-			"Rev": "1c83b3eabd45b6d76072b66b746c20815fb2872d"
+			"ImportPath": "github.com/gin-gonic/gin",
+			"Comment": "v1.0rc1-148-g52fcc5d",
+			"Rev": "52fcc5dbf6e94df33ad313858fb94b713e9d1b4a"
 		},
 		{
-			"ImportPath": "github.com/gorilla/mux",
-			"Rev": "ad4d7a5882b961e07e2626045eb995c022ac6664"
+			"ImportPath": "github.com/manucorporat/sse",
+			"Rev": "fe6ea2c8e398672518ef204bf0fbd9af858d0e15"
+		},
+		{
+			"ImportPath": "github.com/mattn/go-colorable",
+			"Rev": "51a7e7a8b1665b25ca173debdc8d52d493348f15"
+		},
+		{
+			"ImportPath": "golang.org/x/net/context",
+			"Rev": "042ba42fa6633b34205efc66ba5719cd3afd8d38"
+		},
+		{
+			"ImportPath": "gopkg.in/bluesuncorp/validator.v5",
+			"Comment": "v5.12",
+			"Rev": "d5acf1dac43705f8bfbb71d878e290e2bed3950b"
 		}
 	]
 }
