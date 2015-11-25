@@ -4,6 +4,7 @@ import (
 	"net/http"
 
 	"github.com/ariejan/firedragon/server/db"
+	"github.com/ariejan/firedragon/server/model"
 	"github.com/gin-gonic/gin"
 )
 
@@ -37,6 +38,21 @@ func itemsShowHandler(db *db.DB) gin.HandlerFunc {
 		c.JSON(http.StatusOK, gin.H{
 			"item": item,
 		})
+	}
+}
+
+func itemsCreateHandler(db *db.DB) gin.HandlerFunc {
+	return func(c *gin.Context) {
+		var item *model.Item
+		if c.BindJSON(&item) == nil {
+			if db.SaveItem(item) == nil {
+				c.JSON(http.StatusCreated, gin.H{
+					"item": item,
+				})
+			} else {
+				c.String(http.StatusInternalServerError, "Could not create item.")
+			}
+		}
 	}
 }
 

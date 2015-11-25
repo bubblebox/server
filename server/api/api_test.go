@@ -1,6 +1,7 @@
 package api_test
 
 import (
+	"bytes"
 	"net/http"
 	"net/http/httptest"
 	"testing"
@@ -74,6 +75,28 @@ func TestItemsShowNotFound(t *testing.T) {
 
 	if response.Code != http.StatusNotFound {
 		t.Errorf("Expected HTTP 404 Not found, but got HTTP %d instead", response.Code)
+	}
+}
+
+func TestItemCreateWithCode(t *testing.T) {
+	jsonStr := []byte(`{
+		"code": "teapot",
+		"content": "http://google.com/teapot"}
+	`)
+
+	request, _ := http.NewRequest("POST", "/api/v1/items", bytes.NewBuffer(jsonStr))
+	response := httptest.NewRecorder()
+
+	router.ServeHTTP(response, request)
+
+	if response.Code != http.StatusCreated {
+		t.Errorf("Expected HTTP 201 Created, but got HTTP %d instead", response.Code)
+	}
+
+	if !database.DoesItemExist("teapot") {
+		t.Error("Expeced item 'teapot' to have been persisted")
+	} else {
+		database.DeleteItem("teapot")
 	}
 }
 

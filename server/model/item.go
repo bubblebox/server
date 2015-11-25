@@ -17,6 +17,6 @@ const (
 type Item struct {
 	Code      string      `json:"code"`
 	Type      ContentType `json:"type"`
-	Content   string      `json:"content"`
+	Content   string      `json:"content" binding:"required"`
 	CreatedAt time.Time   `json:"created_at"`
 }
