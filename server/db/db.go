@@ -4,6 +4,7 @@ import (
 	"encoding/json"
 	"log"
 
+	"github.com/ariejan/firedragon/server/base62"
 	"github.com/ariejan/firedragon/server/model"
 	"github.com/boltdb/bolt"
 )
@@ -73,9 +74,19 @@ func (db *DB) GetItems() ([]*model.Item, error) {
 // SaveItem will save the item, if the item has no code yet, it will be
 // automatically assigned one. If a code is provided and it already
 // exists, an error will be returned.
-func (db *DB) SaveItem(item *model.Item) error {
+func (db *DB) SaveItem(item *model.Item) (*model.Item, error) {
 	err := db.Update(func(tx *bolt.Tx) error {
 		bucket := tx.Bucket([]byte("items"))
+
+		// Generate a unique code
+		for item.Code == "" {
+			nextId, _ := bucket.NextSequence()
+			code := base62.Encode(nextId)
+
+			if !db.DoesItemExist(code) {
+				item.Code = code
+			}
+		}
 
 		data, err := json.Marshal(item)
 		if err != nil {
@@ -90,10 +101,10 @@ func (db *DB) SaveItem(item *model.Item) error {
 
 	if err != nil {
 		log.Println("Error saving item", err)
-		return err
+		return nil, err
 	}
 
-	return nil
+	return item, nil
 }
 
 // DeleteItem delete the item with `id` from the database
