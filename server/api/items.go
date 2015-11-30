@@ -45,9 +45,9 @@ func itemsCreateHandler(db *db.DB) gin.HandlerFunc {
 	return func(c *gin.Context) {
 		var item *model.Item
 		if c.BindJSON(&item) == nil {
-			if db.SaveItem(item) == nil {
+			if storedItem, err := db.SaveItem(item); err == nil {
 				c.JSON(http.StatusCreated, gin.H{
-					"item": item,
+					"item": storedItem,
 				})
 			} else {
 				c.String(http.StatusInternalServerError, "Could not create item.")

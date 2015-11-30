@@ -68,7 +68,7 @@ func TestSaveItem(t *testing.T) {
 		CreatedAt: time.Now(),
 	}
 
-	err = database.SaveItem(item)
+	_, err = database.SaveItem(item)
 
 	if err != nil {
 		t.Error("Did not expect an error saving Item", err)
@@ -80,6 +80,57 @@ func TestSaveItem(t *testing.T) {
 	}
 
 	database.DeleteItem(item.Code)
+}
+
+func TestSaveItemAutoShortCode(t *testing.T) {
+	var err error
+	var actual *model.Item
+
+	database.SaveItem(&model.Item{
+		Code:      "1",
+		Content:   "Original 1",
+		Type:      model.TextItemType,
+		CreatedAt: time.Now(),
+	})
+	database.SaveItem(&model.Item{
+		Code:      "2",
+		Content:   "Original 2",
+		Type:      model.TextItemType,
+		CreatedAt: time.Now(),
+	})
+
+	item1 := &model.Item{
+		Code:      "",
+		Content:   "Lorem Ipsum",
+		Type:      model.TextItemType,
+		CreatedAt: time.Now(),
+	}
+
+	item2 := &model.Item{
+		Content:   "Lorem Ipsum",
+		Type:      model.TextItemType,
+		CreatedAt: time.Now(),
+	}
+
+	actual, err = database.SaveItem(item1)
+
+	if err != nil {
+		t.Error("Did not expect an error saving Item", err)
+	}
+
+	if actual.Code != "3" {
+		t.Error("Expected saveItem to auto-generate shortcode '3', but got '%s' instead.", err, actual.Code)
+	}
+
+	actual, err = database.SaveItem(item2)
+
+	if err != nil {
+		t.Error("Did not expect an error saving Item", err)
+	}
+
+	if actual.Code != "4" {
+		t.Error("Expected saveItem to auto-generate shortcode '4', but got '%s' instead.", err, actual.Code)
+	}
 }
 
 func TestDeleteItem(t *testing.T) {
