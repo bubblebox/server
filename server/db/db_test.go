@@ -86,6 +86,8 @@ func TestSaveItemAutoShortCode(t *testing.T) {
 	var err error
 	var actual *model.Item
 
+	// Bolt's NextSequence starts at 1 by default, let's assume "1" and "2"
+	// have already been taken.
 	database.SaveItem(&model.Item{
 		Code:      "1",
 		Content:   "Original 1",
@@ -99,6 +101,7 @@ func TestSaveItemAutoShortCode(t *testing.T) {
 		CreatedAt: time.Now(),
 	})
 
+	// Test items with explicit and implicit blank codes
 	item1 := &model.Item{
 		Code:      "",
 		Content:   "Lorem Ipsum",
@@ -112,22 +115,20 @@ func TestSaveItemAutoShortCode(t *testing.T) {
 		CreatedAt: time.Now(),
 	}
 
+	// Test with explicit blank value
 	actual, err = database.SaveItem(item1)
-
 	if err != nil {
 		t.Error("Did not expect an error saving Item", err)
 	}
-
 	if actual.Code != "3" {
 		t.Error("Expected saveItem to auto-generate shortcode '3', but got '%s' instead.", err, actual.Code)
 	}
 
+	// TEst with implicit blank value
 	actual, err = database.SaveItem(item2)
-
 	if err != nil {
 		t.Error("Did not expect an error saving Item", err)
 	}
-
 	if actual.Code != "4" {
 		t.Error("Expected saveItem to auto-generate shortcode '4', but got '%s' instead.", err, actual.Code)
 	}
