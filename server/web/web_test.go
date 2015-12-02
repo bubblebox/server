@@ -7,6 +7,17 @@ import (
 	"testing"
 )
 
+func TestItemNotFound(t *testing.T) {
+	request, _ := http.NewRequest("GET", "/nope", nil)
+	response := httptest.NewRecorder()
+
+	router.ServeHTTP(response, request)
+
+	if response.Code != http.StatusNotFound {
+		t.Errorf("Expected HTTP 404 Not Found, but got HTTP %d instead", response.Code)
+	}
+}
+
 func TestURLRedirect(t *testing.T) {
 	request, _ := http.NewRequest("GET", "/url", nil)
 	response := httptest.NewRecorder()
