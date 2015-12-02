@@ -13,6 +13,10 @@
 			"Rev": "52fcc5dbf6e94df33ad313858fb94b713e9d1b4a"
 		},
 		{
+			"ImportPath": "github.com/itsjamie/gin-cors",
+			"Rev": "fa65524ba44fd80566a2e3923d1504d55e54f586"
+		},
+		{
 			"ImportPath": "github.com/manucorporat/sse",
 			"Rev": "fe6ea2c8e398672518ef204bf0fbd9af858d0e15"
 		},
