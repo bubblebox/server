@@ -14,7 +14,7 @@ If all you want is a working application, simple run:
 
  * make setup && make
  * cd dist
- * ./firedragon and hop over to [http://localhost:8042](http://localhost:8042)
+ * ./firedragon and hop over to [http://admin.127.0.0.1.xip.io:8042](http://admin.127.0.0.1.xip.io:8042)
 
 This handy makefile builds both client and server and puts them in the `dist/`
 directory.
