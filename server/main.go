@@ -71,7 +71,10 @@ func main() {
 	hs[contentHost] = contentRouter
 
 	// Start HTTP server
-	log.Printf("Listening on :%d", port)
+	log.Print(">> Server up and running")
+	log.Printf(">> Content server - http://%s", contentHost)
+	log.Printf(">> API server     - http://%s", apiHost)
+	log.Printf(">> Admin server   - http://%s", adminHost)
 	http.ListenAndServe(portString, hs)
 }
 
