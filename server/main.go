@@ -3,18 +3,40 @@ package main
 import (
 	"fmt"
 	"log"
+	"net/http"
 	"time"
 
 	"github.com/ariejan/firedragon/server/api"
 	"github.com/ariejan/firedragon/server/db"
 	"github.com/ariejan/firedragon/server/ember"
 	"github.com/ariejan/firedragon/server/model"
+	"github.com/ariejan/firedragon/server/web"
 	"github.com/gin-gonic/gin"
+	"github.com/itsjamie/gin-cors"
 )
 
 var (
-	port   = 8042
-	dbName = "firedragon.db"
+	port           = 8042
+	domain         = "127.0.0.1.xip.io"
+	apiSubdomain   = "api"   // api.domain
+	adminSubdomain = "admin" // admin.domain
+	dbName         = "firedragon.db"
+
+	// Generated domain names
+	portString  = fmt.Sprintf(":%d", port)
+	contentHost = fmt.Sprintf("%s:%d", domain, port)
+	apiHost     = fmt.Sprintf("%s.%s:%d", apiSubdomain, domain, port)
+	adminHost   = fmt.Sprintf("%s.%s:%d", adminSubdomain, domain, port)
+
+	corsConfig = cors.Config{
+		Origins:         "*",
+		Methods:         "GET, PUT, POST, DELETE",
+		RequestHeaders:  "Origin, Authorization, Content-Type",
+		ExposedHeaders:  "",
+		MaxAge:          50 * time.Second,
+		Credentials:     true,
+		ValidateHeaders: false,
+	}
 )
 
 func main() {
@@ -30,14 +52,27 @@ func main() {
 	// TODO: Replace this with an optional CLI command to seed data.
 	seedData(db)
 
-	// Setup Gin
-	router := gin.Default()
-	api.Setup(router.Group("/api/v1"), db)
-	ember.Setup(router.Group("/dashboard"))
+	// Configure routers
+	apiRouter := gin.Default()
+	apiRouter.Use(cors.Middleware(corsConfig))
+	api.Setup(apiRouter.Group("/api/v1"), db)
+
+	adminRouter := gin.Default()
+	adminRouter.Use(cors.Middleware(corsConfig))
+	ember.Setup(adminRouter.Group("/"))
+
+	contentRouter := gin.Default()
+	web.Setup(contentRouter.Group("/"), db)
+
+	// Setup subdomain routing
+	hs := make(HostSwitch)
+	hs[apiHost] = apiRouter
+	hs[adminHost] = adminRouter
+	hs[contentHost] = contentRouter
 
 	// Start HTTP server
 	log.Printf("Listening on :%d", port)
-	router.Run(fmt.Sprintf(":%d", port))
+	http.ListenAndServe(portString, hs)
 }
 
 func seedData(db *db.DB) {

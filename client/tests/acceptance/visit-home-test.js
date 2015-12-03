@@ -16,6 +16,6 @@ test('visiting root', function(assert) {
   visit('/');
 
   andThen(function() {
-    assert.equal(find('h2:contains(Fire Dragon)').length, 1);
+    assert.equal(find('a.navbar-brand:contains(Fire Dragon)').length, 1);
   });
 });
