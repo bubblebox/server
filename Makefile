@@ -9,20 +9,21 @@ CLIENT_DIST = $(CLIENT_DIR)/dist/*
 $(DESTINATION): FORCE
 	# Create directory structure
 	mkdir -p $(DESTINATION)
-	mkdir -p $(DESTINATION)/public
 
-	# Compile and copy server binary
-	$(MAKE) -C $(SERVER_DIR)
-	cp $(SERVER_BINARY) $(DESTINATION)
-
-	# Compile and copy client assets
+	# Build client (Ember.js)
 	$(MAKE) -C $(CLIENT_DIR)
-	cp -r $(CLIENT_DIST) $(DESTINATION)/public
+
+	# Move HTML to server/client_dist
+	cp -r $(CLIENT_DIST) $(SERVER_DIR)/client_dist
+
+	# Compile server binary
+	$(MAKE) -C $(SERVER_DIR)
+
+	cp $(SERVER_BINARY) $(DESTINATION)
 
 setup:
 	$(MAKE) -C $(SERVER_DIR) setup
 	$(MAKE) -C $(CLIENT_DIR) setup
-
 .PHONY: setup
 
 test:
