@@ -18,6 +18,7 @@ setup:
 .PHONY: setup
 
 test: FORCE
+	go-bindata-assetfs client_dist/...
 	$(GO_TEST_CMD)
 .PHONY: test
 
