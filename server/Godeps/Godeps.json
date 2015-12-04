@@ -8,6 +8,10 @@
 			"Rev": "b4e20916f62da6837bd349ea75d58c475e1f9fe1"
 		},
 		{
+			"ImportPath": "github.com/elazarl/go-bindata-assetfs",
+			"Rev": "d5cac425555ca5cf00694df246e04f05e6a55150"
+		},
+		{
 			"ImportPath": "github.com/gin-gonic/gin",
 			"Comment": "v1.0rc1-148-g52fcc5d",
 			"Rev": "52fcc5dbf6e94df33ad313858fb94b713e9d1b4a"
