@@ -1,3 +1,6 @@
 # compiled binary
 firedragon
 firedragon.db
+
+bindata_assetfs.go
+client_dist/

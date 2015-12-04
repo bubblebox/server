@@ -8,7 +8,6 @@ import (
 
 	"github.com/ariejan/firedragon/server/api"
 	"github.com/ariejan/firedragon/server/db"
-	"github.com/ariejan/firedragon/server/ember"
 	"github.com/ariejan/firedragon/server/model"
 	"github.com/ariejan/firedragon/server/web"
 	"github.com/gin-gonic/gin"
@@ -59,7 +58,7 @@ func main() {
 
 	adminRouter := gin.Default()
 	adminRouter.Use(cors.Middleware(corsConfig))
-	ember.Setup(adminRouter.Group("/"))
+	adminRouter.StaticFS("", emberAssetFS())
 
 	contentRouter := gin.Default()
 	web.Setup(contentRouter.Group("/"), db)

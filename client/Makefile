@@ -12,17 +12,14 @@ $(DESTINATION): FORCE
 setup:
 	npm install
 	bower install
-
 .PHONY: setup
 
 test: FORCE
 	$(EMBER_TEST_CMD) $(EMBER_TEST_OPTIONS)
-
 .PHONY: test
 
 clean:
 	rm -rf $(DESTINATION)
-
 .PHONY: clean
 
 FORCE:
