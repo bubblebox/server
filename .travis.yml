@@ -1,7 +1,8 @@
 language: go
 
 go:
-  - 1.5.1
+  - 1.5.2
+  - tip
 
 before_install:
   - mv ${TRAVIS_BUILD_DIR}/server/Godeps ${TRAVIS_BUILD_DIR}
@@ -15,3 +16,7 @@ script:
 
 notifications:
   email: false
+
+matrix:
+  allow_failures:
+    - go: tip
