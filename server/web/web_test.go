@@ -40,3 +40,20 @@ func TestURLRedirect(t *testing.T) {
 		t.Errorf("Expected redirect body to contain '%s', but it did not.", expectedTag)
 	}
 }
+
+func TestTextItem(t *testing.T) {
+	request, _ := http.NewRequest("GET", "/txt", nil)
+	response := httptest.NewRecorder()
+
+	router.ServeHTTP(response, request)
+
+	if response.Code != http.StatusOK {
+		t.Errorf("Expected HTTP 200 OK, but got HTTP %d instead", response.Code)
+	}
+
+	body := response.Body.String()
+	expectedTag := "Lorem ipsum"
+	if !strings.Contains(body, expectedTag) {
+		t.Errorf("Expected body to contain '%s', but it did not.", expectedTag)
+	}
+}
