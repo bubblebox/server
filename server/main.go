@@ -78,9 +78,24 @@ func main() {
 }
 
 func seedData(db *db.DB) {
+	var textContent = `
+ This is a **sample text in markdown**!
+
+ It contains:
+
+  * lists
+  * bold text
+  * [links](http://example.com)
+
+ Also, it features blocks of code
+
+     func main() {
+ 	   fmt.Println("Here be fire dragons!")
+     }
+ 	`
 	var items = []*model.Item{
 		&model.Item{Code: "url", Type: model.URLItemType, Content: "https://ariejan.net", CreatedAt: time.Now()},
-		&model.Item{Code: "txt", Type: model.TextItemType, Content: "Lorem ipsum", CreatedAt: time.Now()},
+		&model.Item{Code: "txt", Type: model.TextItemType, Content: textContent, CreatedAt: time.Now()},
 	}
 
 	for _, item := range items {
