@@ -6,15 +6,11 @@ GO_TEST_CMD = go test -v ./...
 GO_FILES := $(shell find . -name '*.go')
 
 $(DESTINATION): $(GO_FILES)
-	go-bindata-assetfs client_dist/...
 	$(GO_BUILD_CMD) $(GO_LDFLAGS) -o $(DESTINATION) *.go
 	chmod +x $(DESTINATION)
 
 setup:
-	go get github.com/jteeuwen/go-bindata/...
-	go get github.com/elazarl/go-bindata-assetfs/...
-	mkdir -p client_dist
-	echo "Ember.js not enabled in debug build." > client_dist/index.html
+	echo "Nothing to do"
 .PHONY: setup
 
 test: FORCE
