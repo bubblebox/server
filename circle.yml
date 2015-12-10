@@ -1,11 +1,19 @@
+machine:
+  environment:
+    IMPORT_PATH: "github.com/ariejan/firedragon/server"
+
 dependencies:
-  override: 
+  pre:
     - nvm install 5.1.1
     - nvm use 5.1.1
-    - make setup
     - npm install -g bower
-    - mv server/Godeps .
-    - godep restore
+    - go get github.com/tools/godep
+
+
+  override: 
+    - mkdir -p "$GOPATH/src/$IMPORT_PATH"
+    - rsync -azC --delete ./server "$GOPATH/src/$IMPORT_PATH/"
+    - make setup
 
 test:
   override:
