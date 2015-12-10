@@ -1,14 +1,45 @@
 <div class="container">
     <div class="row">
         <div class="col-md-12">
+          <form {{action 'submit' on='submit'}}>
+            <div class="form-group">
+              <label for="codeInput">Code</label>
+              {{input type="text" value=code class="form-control" id="codeInput" placeholder="Code"}}
+            </div>
+            <div class="form-group">
+              <label for="payloadInput">Payload</label>
+              {{textarea value=payload class="form-control" id="payloadInput" rows=6 placeholder="the payload goes here"}}
+            </div>
+            <div class="form-group">
+              <div class="radio">
+                {{#radio-button
+                    value="0"
+                    groupValue=type}}
+                    URL
+                {{/radio-button}}
+              </div>
+              <div class="radio">
+                {{#radio-button
+                    value="1"
+                    groupValue=type}}
+                    Text
+                {{/radio-button}}
+              </div>
+            </div>
+            <button type="submit" class="btn btn-default" disabled={{inputIncomplete}} >Submit</button>
+          </form>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
             {{#each model as |item|}}
                 <div class="item" id="item-{{item.code}}">
                     <strong>{{item.code}}</strong>
                     ➠ 
                     {{#if item.isURL}}
-                        <a href="{{item.content}}" target="_blank">{{item.content}}</a>
+                        <a href="{{item.payload}}" target="_blank">{{item.payload}}</a>
                     {{else}}
-                        {{item.content}}
+                        {{item.payload}}
                     {{/if}}
                 </div>
             {{/each}}

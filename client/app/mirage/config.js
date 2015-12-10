@@ -34,6 +34,7 @@ export default function() {
     this.get('/contacts/:id', ['contact', 'addresses']);
   */
 
+  this.post('/items');
   /*
     POST shorthands
 
