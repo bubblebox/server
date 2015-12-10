@@ -14,9 +14,9 @@
         <strong>{{item.code}}</strong>
 
         {{#if item.isURL}}
-          <a href="{{item.content}}" target="_blank">{{item.content}}</a>
+          <a href="{{item.payload}}" target="_blank">{{item.payload}}</a>
         {{else}}
-          {{item.content}}
+          {{item.payload}}
         {{/if}}
 
         <span>{{item.views}}</span>
