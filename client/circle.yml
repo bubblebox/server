@@ -1,0 +1,10 @@
+dependencies:
+  override: 
+    - nvm use 5.1.1
+    - make setup
+    - mv server/Godeps .
+    - npm install -g bower
+
+test:
+  override:
+    - make test
