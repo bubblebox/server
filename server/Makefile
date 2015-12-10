@@ -10,7 +10,7 @@ $(DESTINATION): $(GO_FILES)
 	chmod +x $(DESTINATION)
 
 setup:
-	echo "Nothing to do"
+	go get github.com/tools/godep
 .PHONY: setup
 
 test: FORCE
