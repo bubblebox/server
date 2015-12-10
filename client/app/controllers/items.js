@@ -1,11 +1,8 @@
 import Ember from 'ember';
 
 export default Ember.Controller.extend({
-  inputIncomplete: Ember.computed(function() {
-    console.log('Make it work!');
-    return true;
-    
-  }), 
+  inputIncomplete: Ember.computed.not('inputComplete'),
+  inputComplete: Ember.computed.and('code', 'payload', 'type'),
   actions:{
     submit(){
       var item = this.store.createRecord('item', 
