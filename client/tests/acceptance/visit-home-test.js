@@ -19,3 +19,11 @@ test('visiting root', function(assert) {
     assert.equal(find('a.navbar-brand:contains(Fire Dragon)').length, 1);
   });
 });
+
+test('getting redirected to items', function(assert) {
+  visit('/');
+
+  andThen(function() {
+    assert.equal(currentURL(), '/items');
+  });
+});
