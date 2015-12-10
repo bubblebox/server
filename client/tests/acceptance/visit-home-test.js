@@ -16,14 +16,14 @@ test('visiting root', function(assert) {
   visit('/');
 
   andThen(function() {
-    assert.equal(find('a.navbar-brand:contains(Fire Dragon)').length, 1);
+    assert.equal(find('a.navbar-brand.active:contains(Fire Dragon)').length, 1);
   });
 });
 
-test('getting redirected to items', function(assert) {
+test('visiting root shows items', function (assert) {
   visit('/');
-
-  andThen(function() {
-    assert.equal(currentURL(), '/items');
+  //make sure we have an item
+  andThen(function () {
+    assert.equal(find('ul.items').length, 1);
   });
 });
