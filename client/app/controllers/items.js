@@ -7,13 +7,14 @@ export default Ember.Controller.extend({
     submit(){
       var item = this.store.createRecord('item',
         this.getProperties('code', 'payload', 'type'));
-      item.save().then(() => {
-        this.setProperties({
-          'code': null,
-          'payload': null,
-          'type': null
-        });
-      });
+      item.save().then(this.reset());
     }
+  },
+  reset() {
+    this.setProperties({
+      'code': null,
+      'payload': null,
+      'type': null
+    });
   }
 });
