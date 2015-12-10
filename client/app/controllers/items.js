@@ -3,8 +3,9 @@ import Ember from 'ember';
 export default Ember.Controller.extend({
   actions:{
     submit(){
-      this.store.createRecord('item', 
+      var item = this.store.createRecord('item', 
         this.getProperties('code', 'payload', 'type'));
+      item.save()
     }
   }
 });
