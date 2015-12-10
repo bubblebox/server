@@ -5,9 +5,15 @@ export default Ember.Controller.extend({
   inputComplete: Ember.computed.and('code', 'payload', 'type'),
   actions:{
     submit(){
-      var item = this.store.createRecord('item', 
+      var item = this.store.createRecord('item',
         this.getProperties('code', 'payload', 'type'));
-      item.save()
+      item.save().then(() => {
+        this.setProperties({
+          'code': null,
+          'payload': null,
+          'type': null
+        });
+      });
     }
   }
 });
