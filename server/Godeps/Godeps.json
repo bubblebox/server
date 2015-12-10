@@ -1,15 +1,11 @@
 {
 	"ImportPath": "github.com/ariejan/firedragon/server",
-	"GoVersion": "go1.5.1",
+	"GoVersion": "go1.5.2",
 	"Deps": [
 		{
 			"ImportPath": "github.com/boltdb/bolt",
 			"Comment": "v1.1.0-2-gb4e2091",
 			"Rev": "b4e20916f62da6837bd349ea75d58c475e1f9fe1"
-		},
-		{
-			"ImportPath": "github.com/elazarl/go-bindata-assetfs",
-			"Rev": "d5cac425555ca5cf00694df246e04f05e6a55150"
 		},
 		{
 			"ImportPath": "github.com/gin-gonic/gin",
