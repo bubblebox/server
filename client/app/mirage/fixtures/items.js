@@ -20,4 +20,5 @@ export default [
     "created": "2015-01-01 19:19",
     "views": 34
   },
+
 ];
