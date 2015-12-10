@@ -1,16 +1,20 @@
 <div class="container">
   <h2>Your items!</h2>
-  <!-- menu?! -->
+  <div class="items-sort">
+    Sort:
+    <a href="#">Recent</a>
+    |
+    <a href="#">Popular</a>
+  </div>
   <ul class="items">
     {{#each model as |item|}}
-      <li id="item-{{item.code}}">
+      <li id="item-{{item.code}}" class="itemtype-{{item.type}}">
         <strong>{{item.code}}</strong>
-                    ➠
-                    {{#if item.isURL}}
-                        <a href="{{item.content}}" target="_blank">{{item.content}}</a>
-                    {{else}}
-                        {{item.content}}
-                    {{/if}}
+        {{#if item.isURL}}
+          <a href="{{item.content}}" target="_blank">{{item.content}}</a>
+        {{else}}
+          {{item.content}}
+        {{/if}}
       </li>
     {{/each}}
   </ul>
