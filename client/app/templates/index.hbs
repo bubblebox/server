@@ -6,15 +6,21 @@
     |
     <a href="#">Popular</a>
   </div>
+  <hr>
   <ul class="items">
     {{#each model as |item|}}
       <li id="item-{{item.code}}" class="itemtype-{{item.type}}">
+
         <strong>{{item.code}}</strong>
+
         {{#if item.isURL}}
           <a href="{{item.content}}" target="_blank">{{item.content}}</a>
         {{else}}
           {{item.content}}
         {{/if}}
+
+        <span>{{item.views}}</span>
+        <span>{{item.created}}</span>
       </li>
     {{/each}}
   </ul>

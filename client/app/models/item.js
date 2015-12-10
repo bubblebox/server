@@ -5,13 +5,15 @@ export default DS.Model.extend({
   code: DS.attr('string'),
   content: DS.attr('string'),
   type: DS.attr(),
+  created: DS.attr(),
+  views: DS.attr(),
 
   isURL: Ember.computed('type', function() {
-    return this.get('type') === 0; 
+    return this.get('type') === 0;
   }),
-  
+
   isText: Ember.computed('type', function() {
-    return this.get('type') === 1; 
+    return this.get('type') === 1;
   }),
 
   contentSummary: Ember.computed('content', function() {
