@@ -7,21 +7,23 @@
     <a href="#">Popular</a>
   </div>
   <hr>
-  <ul class="items">
+  <table class="items-list">
     {{#each model as |item|}}
-      <li id="item-{{item.code}}" class="itemtype-{{item.type}}">
+      <tr id="item-{{item.code}}" class="itemtype-{{item.type}}">
 
-        <strong>{{item.code}}</strong>
+        <td>{{item.code}}</td>
 
+        <td class="item-payload">
         {{#if item.isURL}}
           <a href="{{item.payload}}" target="_blank">{{item.payload}}</a>
         {{else}}
           {{item.payload}}
         {{/if}}
+        </td>
 
-        <span>{{item.views}}</span>
-        <span>{{item.created}}</span>
-      </li>
+        <td class="item-views">{{item.views}}</td>
+        <td>{{item.created}}</td>
+      </tr>
     {{/each}}
-  </ul>
+  </table>
 </div>

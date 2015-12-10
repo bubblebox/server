@@ -1,2 +1,28 @@
 @import 'base';
 @import 'layout';
+
+///////////////////////////////////////////////////////////////////////////////
+//
+// List of items on the homepage
+//
+///////////////////////////////////////////////////////////////////////////////
+.items-list {
+  width: 100%;
+
+  td {
+    width: 1%;
+    white-space: nowrap;
+
+    & + td {
+      padding-left: 1em;
+    }
+  }
+
+  .item-views {
+    text-align: right;
+  }
+
+  .item-payload {
+    width: auto;
+  }
+}

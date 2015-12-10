@@ -9,11 +9,11 @@ export default DS.Model.extend({
   views: DS.attr(),
 
   isURL: Ember.computed('type', function() {
-    return this.get('type') === 0;
+    return this.get('type') === "url";
   }),
 
   isText: Ember.computed('type', function() {
-    return this.get('type') === 1;
+    return this.get('type') === "txt";
   }),
 
   payloadSummary: Ember.computed('payload', function() {
