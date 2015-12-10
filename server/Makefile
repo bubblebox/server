@@ -2,7 +2,7 @@ DESTINATION = firedragon
 
 GO_BUILD_CMD = go build
 GO_LDFLAGS =
-GO_TEST_CMD = go test -v ./...
+GO_TEST_CMD = godep go test -v ./...
 GO_FILES := $(shell find . -name '*.go')
 
 $(DESTINATION): $(GO_FILES)
