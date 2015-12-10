@@ -1,27 +1,29 @@
 <div class="container">
     <div class="row">
         <div class="col-md-12">
-          <form>
+          <form {{action 'submit' on='submit'}}>
             <div class="form-group">
               <label for="codeInput">Code</label>
-              <input type="text" class="form-control" id="codeInput" placeholder="Code">
+              {{input type="text" value=code class="form-control" id="codeInput" placeholder="Code"}}
             </div>
             <div class="form-group">
-              <label for="contentInput">Content</label>
-              <textarea class="form-control" id="contentInput" rows=6 placeholder="the content goes here" />
+              <label for="payloadInput">Payload</label>
+              {{textarea value=payload class="form-control" id="payloadInput" rows=6 placeholder="the payload goes here"}}
             </div>
             <div class="form-group">
               <div class="radio">
-                <label>
-                  <input type="radio" name="optionsRadios" id="optionsRadios1" value="0" >
-                  URL
-                </label>
+                {{#radio-button
+                    value="0"
+                    groupValue=type}}
+                    URL
+                {{/radio-button}}
               </div>
               <div class="radio">
-                <label>
-                  <input type="radio" name="optionsRadios" id="optionsRadios2" value="1">
-                  Text
-                </label>
+                {{#radio-button
+                    value="1"
+                    groupValue=type}}
+                    Text
+                {{/radio-button}}
               </div>
             </div>
             <button type="submit" class="btn btn-default">Submit</button>
@@ -35,9 +37,9 @@
                     <strong>{{item.code}}</strong>
                     ➠ 
                     {{#if item.isURL}}
-                        <a href="{{item.content}}" target="_blank">{{item.content}}</a>
+                        <a href="{{item.payload}}" target="_blank">{{item.payload}}</a>
                     {{else}}
-                        {{item.content}}
+                        {{item.payload}}
                     {{/if}}
                 </div>
             {{/each}}
