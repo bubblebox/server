@@ -23,5 +23,6 @@ _testmain.go
 *.test
 *.prof
 
-# Generated
-dist/
+# compiled binary
+firedragon
+firedragon.db

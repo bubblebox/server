@@ -1,39 +1,24 @@
-DESTINATION = dist
+DESTINATION = firedragon
 
-SERVER_DIR = server
-SERVER_BINARY = $(SERVER_DIR)/firedragon
+GO_BUILD_CMD = go build
+GO_LDFLAGS =
+GO_TEST_CMD = go test -v ./...
+GO_FILES := $(shell find . -name '*.go')
 
-CLIENT_DIR = client
-CLIENT_DIST = $(CLIENT_DIR)/dist/*
-
-$(DESTINATION): FORCE
-	# Create directory structure
-	mkdir -p $(DESTINATION) $(DESTINATION)/public
-
-	# Build client (Ember.js)
-	$(MAKE) -C $(CLIENT_DIR)
-	mv $(CLIENT_DIST) $(DESTINATION)/public
-
-	# Compile server binary
-	$(MAKE) -C $(SERVER_DIR)
-	mv $(SERVER_BINARY) $(DESTINATION)
+$(DESTINATION): $(GO_FILES)
+	$(GO_BUILD_CMD) $(GO_LDFLAGS) -o $(DESTINATION) *.go
+	chmod +x $(DESTINATION)
 
 setup:
-	$(MAKE) -C $(SERVER_DIR) setup
-	$(MAKE) -C $(CLIENT_DIR) setup
+	go get github.com/tools/godep
 .PHONY: setup
 
-test:
-	$(MAKE) -C $(SERVER_DIR) test
-	$(MAKE) -C $(CLIENT_DIR) test
-
+test: FORCE
+	$(GO_TEST_CMD)
 .PHONY: test
 
 clean:
-	rm -rf $(DESTINATION)
-	$(MAKE) -C $(SERVER_DIR) clean
-	$(MAKE) -C $(CLIENT_DIR) clean
-
+	rm -f $(DESTINATION)
 .PHONY: clean
 
 FORCE:
