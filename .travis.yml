@@ -1,0 +1,13 @@
+language: go
+go:
+  - 1.5.2
+  - tip
+sudo: false
+notification:
+  email: false
+  slack:
+    secure: FmW01xZiHu+aobRQHflMNi5eQe0iESnVgEri65lBTD7uaFgymyhrSRKRhzw3WvPgbrdNzmZeF/7pGIx9+xj2Xi8SK9k+APsOuBWys7KKh1vvR8BZQ4FCLVWIs85zAZVwvG7JrEn8hK9ZFKu7n0mMj7ustR/tvYEpLOgSskkFrNZT5Gmc6bEQxoHDILppL6Xq8CaOcqDY1TC/S4OiiCNG1ok2XU6+IK2IT8fCc6QBsLh14sAUIf403Klwot1UC8ILDOHTXnHYS1qWNU9LSlTSLjZuwrbAQlM15NRHq1SIEwzbl2QKtEvr8eKmNglbCb++KUPlAbt9rfuiv7JPFv0dldXT+y8fDjqqkJaZxpibfXjwuiflrMSDWckshgKwWMz29r/w7uJy4tEPuHrAAoZBYemK3Fr8lJcrIQcdH7jsUSh9yldhQ8t7y9F9j/secqqE+lDtsS1CjYNH/Oy0DXRgPHu2oAVDl2vgHyOf73NJMz63cYsjakOEPZfObcxg8ikKMNR6MuVHdA3rj4AMhKTtwdObN6A/qd8dKpxQZvjr2sBYr2cf6QqRdyxS0UiWWMz3qR4Vmy58XLzaK/Lfc1nrKgYVMcdW4ynBFDVowm4QwGzJm3Ae3ZMAUfX+pOoH72Qd1LMt/NPFswIfb0141hH/iWVV//s3dNH4HoOAR5h1axc=
+matrix:
+  allow_failures:
+    - go: tip
+
