@@ -1,7 +1,7 @@
 package api
 
 import (
-	"github.com/ariejan/firedragon/server/db"
+	"github.com/bubblebox/server/db"
 	"github.com/gin-gonic/gin"
 )
 

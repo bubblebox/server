@@ -6,11 +6,11 @@ import (
 	"net/http"
 	"time"
 
-	"github.com/ariejan/firedragon/server/api"
-	"github.com/ariejan/firedragon/server/db"
-	"github.com/ariejan/firedragon/server/ember"
-	"github.com/ariejan/firedragon/server/model"
-	"github.com/ariejan/firedragon/server/web"
+	"github.com/bubblebox/server/api"
+	"github.com/bubblebox/server/db"
+	"github.com/bubblebox/server/ember"
+	"github.com/bubblebox/server/model"
+	"github.com/bubblebox/server/web"
 	"github.com/gin-gonic/gin"
 	"github.com/itsjamie/gin-cors"
 )
@@ -20,7 +20,7 @@ var (
 	domain         = "127.0.0.1.xip.io"
 	apiSubdomain   = "api"   // api.domain
 	adminSubdomain = "admin" // admin.domain
-	dbName         = "firedragon.db"
+	dbName         = "bubblebox.db"
 
 	// Generated domain names
 	portString  = fmt.Sprintf(":%d", port)

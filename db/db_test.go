@@ -5,8 +5,8 @@ import (
 	"testing"
 	"time"
 
-	"github.com/ariejan/firedragon/server/db"
-	"github.com/ariejan/firedragon/server/model"
+	"github.com/bubblebox/server/db"
+	"github.com/bubblebox/server/model"
 )
 
 var database = &db.DB{}

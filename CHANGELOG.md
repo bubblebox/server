@@ -7,5 +7,4 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
  * Implement REST API server for items
 
-
-[Unreleased]: https://github.com/ariejan/firedragon/tree/master
+[Unreleased]: https://github.com/bubblebox/server/tree/master

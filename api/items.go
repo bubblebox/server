@@ -3,8 +3,8 @@ package api
 import (
 	"net/http"
 
-	"github.com/ariejan/firedragon/server/db"
-	"github.com/ariejan/firedragon/server/model"
+	"github.com/bubblebox/server/db"
+	"github.com/bubblebox/server/model"
 	"github.com/gin-gonic/gin"
 )
 

@@ -1,4 +1,4 @@
-DESTINATION = firedragon
+DESTINATION = bubblebox
 
 GO_BUILD_CMD = go build
 GO_LDFLAGS =

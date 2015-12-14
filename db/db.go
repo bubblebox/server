@@ -4,9 +4,9 @@ import (
 	"encoding/json"
 	"log"
 
-	"github.com/ariejan/firedragon/server/base62"
-	"github.com/ariejan/firedragon/server/model"
 	"github.com/boltdb/bolt"
+	"github.com/bubblebox/server/base62"
+	"github.com/bubblebox/server/model"
 )
 
 // DB wraps BoltDB and handles storing/retrieving data

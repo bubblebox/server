@@ -5,8 +5,8 @@ import (
 	"html/template"
 	"net/http"
 
-	"github.com/ariejan/firedragon/server/db"
-	"github.com/ariejan/firedragon/server/model"
+	"github.com/bubblebox/server/db"
+	"github.com/bubblebox/server/model"
 	"github.com/gin-gonic/gin"
 )
 
@@ -16,7 +16,7 @@ const tpl = `
   <head>
     <meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>Fire Dragon</title>
+	<title>BubbleBox</title>
 	<link href="https://cdnjs.cloudflare.com/ajax/libs/pure/0.6.0/pure-min.css" rel="stylesheet">
 	<style>
 		.wrapper {
@@ -36,7 +36,7 @@ const tpl = `
 			</pre>
 	    </div>
 		<hr>
-		<footer>Hosted by <a href="https://github.com/ariejan/firedragon">Fire Dragon</a></footer>
+		<footer>Hosted by <a href="https://github.com/bubblebox">BubbleBox</a></footer>
 	</div>
   </body>
 </html>`

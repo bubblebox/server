@@ -1,10 +1,10 @@
 # Fire Dragon
 
-[![Build Status](https://travis-ci.org/ariejan/firedragon.svg?branch=master)](https://travis-ci.org/ariejan/firedragon)
+[![Build Status](https://travis-ci.org/bubblebox/server.svg?branch=master)](https://travis-ci.org/bubblebox/server)
 
 A modern content hosting service builtd on Go and Ember.js.
 
-See [the wiki](https://github.com/ariejan/firedragon/wiki) for more details.
+See [the wiki](https://github.com/bubblebox/server/wiki) for more details.
 
 ## Running
 

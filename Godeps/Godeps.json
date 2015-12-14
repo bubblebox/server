@@ -1,5 +1,5 @@
 {
-	"ImportPath": "github.com/ariejan/firedragon/server",
+	"ImportPath": "github.com/bubblebox/server",
 	"GoVersion": "go1.5.2",
 	"Deps": [
 		{

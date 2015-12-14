@@ -3,7 +3,7 @@ package base62_test
 import (
 	"testing"
 
-	"github.com/ariejan/firedragon/server/base62"
+	"github.com/bubblebox/server/base62"
 )
 
 var base62Tests = []struct {
